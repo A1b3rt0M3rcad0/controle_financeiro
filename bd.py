@@ -231,8 +231,18 @@ def deletar_categoria(cnx, username, password, carteira_id, categoria_id, tipo):
     else:
         return 'Erro: parametro "Tipo" não é reconhecido.'
 
+def criar_carteira(cnx, username, password, nome):
+    with cnx.cursor() as cursor:
+        try:
+            cursor.callproc('criarCarteira', (username, password, nome, 'None'))
+            cnx.commit()
+            return 'Carteira Criada'
+        except:
+            return 'Erro: Criar_carteira()'
+
+
 
 
 
 if __name__ == '__main__':
-    print(criar_categoria(cnx(), 'user3', 'abcdef', 3,'s', 'teste', 'testeste'))
+    print(criar_carteira(cnx(), 'user3', 'abcdef', 'teste'))
