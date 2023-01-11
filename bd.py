@@ -239,10 +239,3 @@ def criar_carteira(cnx, username, password, nome):
             return 'Carteira Criada'
         except:
             return 'Erro: Criar_carteira()'
-
-
-
-
-
-if __name__ == '__main__':
-    print(criar_carteira(cnx(), 'user3', 'abcdef', 'teste'))

@@ -3,6 +3,7 @@ import bd
 import tkinter as tk
 from tkinter import ttk
 import widgets_principal as wp
+import user_details as ut
 
 arial24 = ('Arial', 24)
 arial15 = ('Arial', 15)
@@ -70,11 +71,11 @@ class App(customtkinter.CTk):
         self.space = customtkinter.CTkLabel(self.informacoes_usuario, width=8*self.WIDTH, height=5*self.HEIGHT, text='')
         self.space.grid(column=0, row=6, padx=self.PADX, pady=self.PADY)
             # Detalhes da conta
-        self.logout_button = customtkinter.CTkButton(self.informacoes_usuario, text='Account Details', width=8*self.WIDTH, height=self.HEIGHT)
-        self.logout_button.grid(column=0, row=7, padx=self.PADX, pady=self.PADY)
+        self.details_button = customtkinter.CTkButton(self.informacoes_usuario, text='Account Details', width=8*self.WIDTH, height=self.HEIGHT)
+        self.details_button.grid(column=0, row=7, padx=self.PADX, pady=self.PADY)
             # Button Criar Carteira
-        self.logout_button = customtkinter.CTkButton(self.informacoes_usuario, text='Create Wallet', width=8*self.WIDTH, height=self.HEIGHT)
-        self.logout_button.grid(column=0, row=8, padx=self.PADX, pady=self.PADY)
+        self.create_button = customtkinter.CTkButton(self.informacoes_usuario, text='Create Wallet', width=8*self.WIDTH, height=self.HEIGHT, command=self.criar_carteira)
+        self.create_button.grid(column=0, row=8, padx=self.PADX, pady=self.PADY)
             # Button Logout
         self.logout_button = customtkinter.CTkButton(self.informacoes_usuario, text='Logout', width=8*self.WIDTH, height=self.HEIGHT, command=self.logout)
         self.logout_button.grid(column=0, row=9, padx=self.PADX, pady=self.PADY)
@@ -116,6 +117,9 @@ class App(customtkinter.CTk):
 
     def selecionar_carteira(self):
         self.CARTEIRA_SELECIONADA = self.lista_carteiras.get()
+        # ATULIZA LISTA CARTEIRAS
+        self.carteiras = bd.ver_carteiras(bd.cnx(), self.USERNAME, self.PASSWORD)
+        self.lista_carteiras.configure(values=self.carteiras)
         # ATUALIZA O NOME DA CARTEIRA
         self.nome_carteira_label = bd.ver_nome_carteira(bd.cnx(), self.USERNAME, self.PASSWORD, int(self.CARTEIRA_SELECIONADA))
         self.nome_carteira.configure(text=f'{self.nome_carteira_label}')
@@ -148,6 +152,10 @@ class App(customtkinter.CTk):
         self.criar_categoria.grid(column=2, row=3, padx=self.PADX, pady=self.PADY)
         self.update_idletasks()
         self.update()
+    
+    def criar_carteira(self):
+        ut.CriarCarteira(self.USERNAME, self.PASSWORD, self)
+
     
     def logout(self):
         self.USERNAME = None
