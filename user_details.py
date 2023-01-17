@@ -32,7 +32,7 @@ class CriarCarteira(customtkinter.CTk):
         self.button = customtkinter.CTkButton(self, text='Creat Wallet', width=self.WIDTH, height=self.HEIGHT, command=self.criar_carteira)
         self.button.grid(row=3, column=0, columnspan=3)
 
-        # Loop
+        # Loo0p
         self.mainloop()
     
     def criar_carteira(self):
