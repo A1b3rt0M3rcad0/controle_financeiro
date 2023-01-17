@@ -37,6 +37,7 @@ class CriarCarteira(customtkinter.CTk):
     
     def criar_carteira(self):
         self.name = self.entry_name.get()
+        self.entry_name.delete(0, customtkinter.END)
         result = bd.criar_carteira(bd.cnx(), self.USERNAME, self.PASSWORD, self.name)
         self.APP.selecionar_carteira()
         wp.MsgMovimentarSaldo(result)
