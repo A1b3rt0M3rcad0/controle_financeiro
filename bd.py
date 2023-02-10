@@ -100,7 +100,7 @@ def ver_categorias_carteira(cnx, username, password, carteira_id, tipo, retorno=
                 categorias = list(map(str, categorias))
                 return categorias
             except:
-                return ['Error: User does not have a wallet or associated category']
+                return ['Crie uma categoria']
         elif retorno == None:
             categorias = df
             return categorias
